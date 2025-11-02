@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Transactions</h2>
+
+<div class="row">
+  <div class="col-md-6">
+    <h5>Borrow a Book</h5>
+    <form method="post">
+      <input type="hidden" name="type" value="borrow">
+      <div class="mb-3">
+        <label class="form-label">Member</label>
+        <select name="member_id" class="form-select" required>
+          <option value="">Choose member...</option>
+          {% for m in members %}
+            <option value="{{ m.member_id }}">{{ m.member_id }} — {{ m.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Book</label>
+        <select name="book_title" class="form-select" required>
+          <option value="">Choose book...</option>
+          {% for b in books %}
+            <option value="{{ b.title }}">{{ b.title }} ({{ b.available_copies }})</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button class="btn btn-primary">Borrow</button>
+    </form>
+  </div>
+
+  <div class="col-md-6">
+    <h5>Return a Book</h5>
+    <form method="post">
+      <input type="hidden" name="type" value="return">
+      <div class="mb-3">
+        <label class="form-label">Member</label>
+        <select name="member_id" class="form-select" required>
+          <option value="">Choose member...</option>
+          {% for m in members %}
+            <option value="{{ m.member_id }}">{{ m.member_id }} — {{ m.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Book Title</label>
+        <input name="book_title" class="form-control" placeholder="Exact book title" required>
+      </div>
+      <button class="btn btn-warning">Return</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center">
+  <h2>Members</h2>
+  <a class="btn btn-success" href="{{ url_for('add_member') }}">Add Member</a>
+</div>
+<table class="table table-striped mt-3">
+  <thead><tr><th>ID</th><th>Name</th><th>Borrowed Books</th></tr></thead>
+  <tbody>
+    {% for m in members %}
+      <tr>
+        <td>{{ m.member_id }}</td>
+        <td>{{ m.name }}</td>
+        <td>{{ m.borrowed_books | join(', ') if m.borrowed_books else 'None' }}</td>
+      </tr>
+    {% else %}
+      <tr><td colspan="3">No members yet.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
